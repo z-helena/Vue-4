@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
 export default {
     data() {
         return {
             user: {
-                first_name: "",
-                last_name: "",
+                firstName: "",
+                lastName: "",
                 email: ""
             }
 
@@ -13,19 +13,20 @@ export default {
 
     methods: {
         async fetchUser() {
-            const response = await fetch('https://hm-bookstore-api.onrender.com/user/3');
-            console.log(response);
-
-            const data = await response.json();
-            this.user = data;
-        }
+            const response = await fetch('https://hm-bookstore-api.onrender.com/user/3', {
+                method: 'GET'
+        });
+        const data = await response.json();
+        this.user = data;
     }
+}
 }
 </script>
 
 <template>
-    <p>{{ user.first_name }}</p>
-    <p>{{ user.last_name }}</p>
+    <button @click="fetchUser">Get user </button>
+    <p>{{ user.firstName }}</p>
+    <p>{{ user.lastName }}</p>
     <p>{{ user.email }}</p>
 
 </template>
